@@ -64,7 +64,11 @@ function login(){
   <button class="p" onclick="sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin}})">Sign in with Cedar Valley hospital account</button>
   <p class="l">Demo single sign-on: this uses a Google test sign-in, not a live hospital identity provider. No hospital credentials are collected.</p></div></div>`}
 sb.auth.onAuthStateChange(e=>{if(e==='SIGNED_OUT')login()});
-const SUPABASE_URL='https://goasoxnvnjlihiislckh.supabase.co', SUPABASE_ANON_KEY='sb_publishable_...';
+async function init(){
+  const {data:{session}}=await sb.auth.getSession(); if(!session) return login();
+  const {data}=await sb.from('profiles').select('*').single(); S.me=data;
+  S.tab=data.role==='learner'?'tracker':'analytics'; await load();
+}
 async function load(){
   const r=S.me.role,rev=r==='ld'||r==='compliance',p={};
   if(r!=='learner')p.stats=sb.rpc('get_stats',{p_h:S.f.h||null,p_r:S.f.r||null,p_c:S.f.c||null});
