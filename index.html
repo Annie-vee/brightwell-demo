@@ -2,73 +2,126 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Brightwell Premium Plan Simulation</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:light;--bg:#fff;--ink:#16324a;--mut:#5d7a91;--line:#d3e7f5;--card:#fff;--acc:#1a7db3;--sky:#bfe3f8;--pink:#fde4ee;--pinkd:#e58fb0;--ok:#1b7a4f;--warn:#a86a00;--bad:#c0264b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Sans",system-ui,sans-serif}
-main{max-width:1180px;margin:0 auto;padding:16px}
-header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px}
-h1{font-size:20px;margin:0}h2{font-size:16px;margin:16px 0 8px}
-.banner{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--warn);padding:8px 12px;border-radius:4px;font-size:13px;color:var(--mut);margin-bottom:12px}
-nav{display:flex;gap:4px;flex-wrap:wrap;margin:8px 0}
-button,select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:6px 10px;cursor:pointer}
-button.p{background:var(--acc);color:#fff;border-color:var(--acc)}button.on{border-color:var(--acc);box-shadow:inset 0 -3px 0 var(--acc)}
-button.s{padding:2px 8px;font-size:13px}button:focus-visible,select:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-.box{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
-.n{font-size:26px;font-weight:600}.l{color:var(--mut);font-size:13px}
-.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;background:var(--card);border:1px solid var(--line);font-size:13px}
-th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--mut);font-weight:600}
-.t{padding:1px 7px;border-radius:10px;font-size:12px;border:1px solid currentColor}
-.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}.mut{color:var(--mut)}
-.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc)}
-.toast{position:sticky;top:0;z-index:5;padding:8px 12px;border-radius:4px;margin-bottom:8px;background:var(--ok);color:#fff}.toast.err{background:var(--bad)}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-
-body{background:radial-gradient(circle at 100% 0,#fde4ee,transparent 420px),linear-gradient(#e3f3fc,#fff 440px) no-repeat,#fff}
-header{background:linear-gradient(90deg,#d6eefc,#fde4ee);padding:10px 14px;border-radius:8px}
-button.on{background:var(--pink);border-color:var(--pinkd);box-shadow:none}
-button:hover{border-color:var(--acc)}th{background:#eaf5fc}
-.feat{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:8px 0}
-.feat .im{flex:0 0 220px;height:100px;background-size:cover}.feat p{margin:2px 0}.feat b{color:var(--acc)}
-.login{display:grid;grid-template-columns:1fr 1fr;max-width:860px;margin:8vh auto;border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--line)}
-.login .pic{background:var(--pink);display:flex;align-items:flex-end}.login img{width:100%;mix-blend-mode:multiply}.login .f{padding:28px;align-self:center}
-.scrim{position:fixed;inset:0;background:rgba(22,50,74,.45);display:flex;align-items:center;justify-content:center;padding:12px;z-index:9;overflow:auto}
+:root{--ink:#1f2d3d;--mut:#5f7387;--line:#dbe8f2;--acc:#1a7db3;--accd:#12608a;--sky:#e8f5fd;--sky2:#cfe9f8;--pink:#fde7f0;--pinkd:#e58fb0;--ok:#1b7a4f;--warn:#a86a00;--bad:#c0264b}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.55 "Source Sans 3",system-ui,sans-serif;background:#fff}
+#bg{position:fixed;inset:0;z-index:-1;background:center/cover}
+#bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.87),rgba(238,247,253,.92))}
+.b-hall{background-image:url(assets/bg-hall.jpg)}.b-ward{background-image:url(assets/bg-ward.jpg)}.b-team{background-image:url(assets/bg-team.jpg)}.b-class{background-image:url(assets/bg-class.jpg)}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:34px;line-height:1.15;margin:6px 0 10px}h2{font-size:22px;margin:0 0 4px}h3{font-size:17px;margin:0 0 4px}p{margin:0 0 8px}
+.mut{color:var(--mut)}.lead{font-size:18px;color:#34495e;max-width:560px}
+button,select{font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer}
+button{font-weight:600}button:hover{border-color:var(--acc)}button:focus-visible,select:focus-visible{outline:3px solid var(--sky2);outline-offset:1px}
+.p{background:var(--acc);color:#fff;border-color:var(--acc)}.p:hover{background:var(--accd)}.big{padding:12px 20px;font-size:17px}.s{padding:3px 10px;font-size:14px}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.top .in{max-width:1180px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--accd);line-height:1.1}.brand small{display:block;font-weight:400;font-size:12px;color:var(--mut)}
+.tabs{display:flex;gap:2px;flex:1;overflow-x:auto;min-width:240px}
+.tabs button{border:0;background:none;padding:12px 12px;color:var(--mut);border-bottom:3px solid transparent;border-radius:0;white-space:nowrap}
+.tabs button.on{color:var(--accd);border-bottom-color:var(--pinkd)}
+.who{display:flex;align-items:center;gap:8px;font-size:14px}.av{width:32px;height:32px;border-radius:50%;background:var(--pink);color:var(--accd);display:flex;align-items:center;justify-content:center;font-weight:700}
+.who select{padding:5px 8px;font-size:14px}
+.card{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(26,125,179,.06)}
+.hero{border-radius:18px;padding:34px 30px;margin-bottom:16px;border:1px solid var(--line);background:linear-gradient(100deg,rgba(207,233,248,.97) 0,rgba(214,238,252,.86) 52%,rgba(253,231,240,.55) 100%),url(assets/bg-hall.jpg) center/cover}
+.eyebrow{display:inline-block;background:#fff;color:var(--accd);border-radius:20px;padding:2px 12px;font-size:13px;font-weight:600}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin:12px 0}.kpi b{font-size:32px;display:block;line-height:1.1;color:var(--accd)}.kpi span{font-weight:600}.kpi p{font-size:13px;color:var(--mut);margin:2px 0 0}
+.sec{margin:26px 0 10px}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.step{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:14px;padding:14px;position:relative}.step.me{border-color:var(--acc);box-shadow:0 0 0 3px var(--sky2)}
+.step i{width:28px;height:28px;border-radius:50%;background:var(--pink);color:var(--accd);display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;margin-bottom:6px}
+.step p{font-size:14px;color:var(--mut)}.here{font-size:12px;font-weight:700;color:var(--accd);background:var(--sky);border-radius:10px;padding:1px 8px;margin-left:6px}
+.ph{margin:4px 0 12px}.ph p{color:var(--mut)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}.bar label{font-size:13px;color:var(--mut);display:flex;flex-direction:column}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.chips button{border-radius:20px;padding:5px 14px;font-size:14px}.chips .on{background:var(--pink);border-color:var(--pinkd)}
+.wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.96)}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--sky);color:var(--accd);font-weight:600;white-space:nowrap}tr:last-child td{border-bottom:0}td small{display:block;color:var(--mut)}
+.t{display:inline-block;padding:1px 9px;border-radius:12px;font-size:12px;font-weight:600;margin:1px 2px 1px 0;background:#eef3f7;color:var(--mut)}
+.t.ok{background:#e4f4ec;color:var(--ok)}.t.warn{background:#fdf1dc;color:var(--warn)}.t.bad{background:#fde6ec;color:var(--bad)}
+.bar2{height:10px;background:var(--line);border-radius:5px;overflow:hidden}.bar2 i{display:block;height:100%;background:var(--acc)}
+.ticks{list-style:none;padding:0;margin:14px 0}.ticks li{padding-left:26px;position:relative;margin:6px 0}.ticks li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+.lg{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;min-height:78vh}.lg .card{padding:28px}
+.empty{padding:28px;text-align:center;color:var(--mut)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;padding:10px 18px;border-radius:10px;background:var(--ok);color:#fff;max-width:92vw;box-shadow:0 6px 20px rgba(0,0,0,.2)}.toast.err{background:var(--bad)}
+.foot{margin-top:30px;font-size:13px;color:var(--mut);text-align:center}.foot button{font-size:13px;padding:2px 10px;margin-left:6px}
+.scrim{position:fixed;inset:0;background:rgba(22,50,74,.45);display:flex;align-items:center;justify-content:center;padding:12px;z-index:60;overflow:auto}
+.tour{background:#fff;max-width:460px;width:100%;border-radius:16px;padding:26px;border-top:6px solid var(--pinkd)}.dots{display:flex;gap:6px;margin:14px 0}.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}.dots i.on{background:var(--acc)}
 .cert{position:relative;background:#fff;max-width:620px;width:100%;border:3px double var(--acc);border-radius:6px;padding:8px;overflow:hidden}
-.cert::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 0 0,var(--pink),transparent 130px),radial-gradient(circle at 100% 100%,var(--sky),transparent 150px)}
-.cert::after{content:"SAMPLE";position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-18deg);font-size:96px;font-weight:600;color:rgba(26,125,179,.07);pointer-events:none}
-.cin{position:relative;text-align:center;padding:16px 20px}.cin h2{font-size:22px;color:var(--acc);margin:12px 0 6px}
-.mark{display:flex;align-items:center;justify-content:center;gap:10px;text-align:left}
-.big{font-size:34px;font-weight:600;letter-spacing:1px}.course{font-size:20px;font-weight:600;color:var(--acc);border-bottom:2px solid var(--pinkd);display:inline-block;padding:0 12px}
+.cert::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 0 0,var(--pink),transparent 130px),radial-gradient(circle at 100% 100%,var(--sky2),transparent 150px)}
+.cert::after{content:"SAMPLE";position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-18deg);font-size:96px;font-weight:700;color:rgba(26,125,179,.07);pointer-events:none}
+.cin{position:relative;text-align:center;padding:16px 20px}.cin h2{color:var(--accd);margin:12px 0 6px}.mark{display:flex;align-items:center;justify-content:center;gap:10px;text-align:left}
+.big2{font-size:34px;font-weight:700;letter-spacing:1px}.course{font-size:20px;font-weight:700;color:var(--acc);border-bottom:2px solid var(--pinkd);display:inline-block;padding:0 12px}
 .meta{display:flex;gap:12px;justify-content:space-between;align-items:center;text-align:left;font-size:13px;margin-top:14px;flex-wrap:wrap}
-.stamp{border:2px solid currentColor;border-radius:50%;width:118px;height:118px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:600;font-size:13px;padding:10px;transform:rotate(-8deg)}
-@media(max-width:700px){.login{grid-template-columns:1fr}.feat{flex-direction:column;align-items:stretch}.feat .im{flex-basis:auto;width:100%;height:120px}.feat div.tx{padding:0 12px 10px}}
+.stamp{border:2px solid currentColor;border-radius:50%;width:118px;height:118px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:13px;padding:10px;transform:rotate(-8deg)}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}.mutc{color:var(--mut)}
+@media(max-width:760px){.lg{grid-template-columns:1fr;min-height:auto}h1{font-size:28px}.hero{padding:24px 18px}}
 @media print{body *{visibility:hidden}.cert,.cert *{visibility:visible}.scrim{background:none;position:static}.cert{position:absolute;left:0;top:0}}
-</style></head><body><main id="app"></main>
+</style></head><body>
+<div id="bg" class="b-hall"></div><div id="top"></div><main id="app"></main><div id="modal"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
 <script>
-// 1) Paste your Supabase project values (Project Settings > API). The anon key is safe to expose.
-const SUPABASE_URL='https://goasoxnvnjlihiislckh.supabase.co', SUPABASE_ANON_KEY='sb_publishable_PvPZ1MugqdXkczbZLi-Grw_fYZqw163';
-const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+// Your Supabase URL and key live in config.js (not here), so updating this file never erases them.
+const CFG=window.CONFIG||{};
+const sb=CFG.url&&CFG.key&&!/PASTE/.test(CFG.key)?supabase.createClient(CFG.url,CFG.key):null;
 
-const HOSP=['Cedar Valley Medical Center','Lakeside General','Ridgeview Community'], ROLES=['Nurse','Physician','Technician','Administrator'];
+const HOSP=['Cedar Valley Medical Center','Lakeside General','Ridgeview Community'],ROLES=['Nurse','Physician','Technician','Administrator'];
 const RN={learner:'Learner',ld:'Kevin (L&D)',compliance:'Lisa (Compliance)',executive:'Angela (Executive)'};
+const INFO={
+ learner:{t:'Learner',d:'See your own required courses and whether your certificates have been checked.',todo:['See which courses are due','Mark a course as complete','Check if your certificate is verified']},
+ ld:{t:'Learning & Development',d:'Find training problems early and get them fixed before Friday.',todo:['Review problems the system flagged','Upload missing certificates','Run or download the Friday report']},
+ compliance:{t:'Compliance',d:'Check that certificates are genuine, then approve or reject them.',todo:['Open certificates waiting for you','Verify or reject each one','Download the corrected report']},
+ executive:{t:'Executive',d:'See the big picture across every hospital. You can view, not edit.',todo:['Read the live dashboard','Filter by hospital, role or staff group','Download saved reports']}};
+const JOUR=[['Training is tracked','Every required course for every nurse, with due dates.','tracker',['learner','ld','compliance']],
+ ['Problems are flagged','Missing certificates and overdue courses are found automatically, before Friday.','issues',['ld']],
+ ['Kevin coordinates fixes','He follows up with staff and uploads missing certificates.','tracker',['ld']],
+ ['Lisa verifies evidence','She approves genuine certificates and rejects wrong ones.','tracker',['compliance']],
+ ['Report and dashboard update','A report is saved every Friday and the dashboard shows the latest numbers.','reports',['ld','compliance','executive']]];
+const TOUR=[['Welcome','This is a simulation of Brightwell Learning’s Premium plan for Cedar Valley Health. Every person and record is invented.'],
+ ['Your role','You signed in with a demo hospital account. Your role decides what you can see and do. Use “Demo role” at the top to try the others.'],
+ ['Follow the story','Training is tracked, problems are flagged, Kevin coordinates fixes, Lisa verifies certificates, and Friday’s report and the dashboard update.'],
+ ['Where to click','Use the tabs at the top. On Home, the big blue button always shows your next step.'],
+ ['Try it yourself','Switch to Kevin and upload CV-017’s missing certificate. Switch to Lisa and verify it. Then open Friday reports and run a report.']];
+const ST={not_started:'Not started',in_progress:'In progress',completed:'Completed'};
+const CS={'n/a':'Not needed yet',missing:'Missing',awaiting:'Awaiting verification',verified:'Verified',rejected:'Rejected'};
+const CC={missing:'bad',awaiting:'warn',verified:'ok',rejected:'bad'};
+const CHIPS=[['all','All'],['attention','Needs attention'],['awaiting','Awaiting verification'],['missing','Missing certificate'],['overdue','Overdue']];
+
+const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=d=>d?new Date(d).toLocaleString():'';
-let S={me:null,tab:'analytics',f:{h:'',r:'',c:''},rows:[],issues:[],runs:[],acts:[],settings:[],stats:null,msg:null,cert:null};
+const tag=(t,c)=>`<span class="t ${c||''}">${esc(t)}</span>`;
+let S={me:null,tab:'home',chip:'all',f:{h:'',r:'',c:''},rows:[],issues:[],runs:[],acts:[],settings:[],stats:null,msg:null,cert:null,tour:null,loading:true};
+const nameOf=()=>S.gname||'there';
+const tabsFor=r=>r==='learner'?[['home','Home'],['tracker','My training']]
+ :r==='executive'?[['home','Home'],['analytics','Dashboard'],['reports','Friday reports']]
+ :[['home','Home'],['analytics','Dashboard'],['tracker','Training & certificates'],['issues','Issues to fix'],['reports','Friday reports'],['log','Activity history']];
+const BG={home:'b-hall',analytics:'b-hall',tracker:'b-ward',issues:'b-team',reports:'b-class',log:'b-team'};
 
 function toast(t,err){S.msg={t,err};render();setTimeout(()=>{S.msg=null;render()},6000)}
+function go(t,c){S.tab=t;S.chip=c||'all';render();window.scrollTo(0,0)}
 function login(){
-  document.getElementById('app').innerHTML=`<div class="login"><div class="pic"><img src="assets/nurse.jpg" alt="Nurse reviewing training records on a tablet"></div>
-  <div class="f"><h1>Brightwell Premium Plan Simulation</h1><p class="mut">Cedar Valley Health · fictional demo data</p>
-  <button class="p" onclick="sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin}})">Sign in with Cedar Valley hospital account</button>
-  <p class="l">Demo single sign-on: this uses a Google test sign-in, not a live hospital identity provider. No hospital credentials are collected.</p></div></div>`}
-sb.auth.onAuthStateChange(e=>{if(e==='SIGNED_OUT')login()});
+  $('bg').className='b-hall';$('top').innerHTML='';$('modal').innerHTML='';
+  $('app').innerHTML=`<div class="lg"><div><div class="brand"><svg viewBox="0 0 40 40" width="40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#fde7f0" stroke="#1a7db3" stroke-width="2"/><path d="M17 9h6v8h8v6h-8v8h-6v-8H9v-6h8z" fill="#1a7db3"/></svg><span>Brightwell<small>for Cedar Valley Health</small></span></div>
+  <h1>Keep every nurse’s training on track.</h1><p class="lead">Track required courses, check certificates, and get an accurate compliance report every Friday.</p>
+  <ul class="ticks"><li>Problems are flagged before Friday</li><li>A person verifies every certificate</li><li>One live dashboard for all hospitals</li></ul></div>
+  <div class="card"><h2>Sign in</h2><p class="mutc">Use the demo hospital account to continue.</p>
+  <button class="p big" style="width:100%" onclick="sb&&sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin}})">Sign in with Cedar Valley hospital account</button>
+  <p style="font-size:13px;margin-top:12px" class="mutc">Demo sign-in through Google. This is not a live hospital system and no hospital passwords are collected. All data is fictional.</p></div></div>`}
+
 async function init(){
-  const {data:{session}}=await sb.auth.getSession(); if(!session) return login();
+  if(!sb){$('app').innerHTML='<div class="card"><h2>One setup step left</h2><p>Open <b>config.js</b> and paste your Supabase URL and key, then save and reload.</p></div>';return}
+  const {data:{session}}=await sb.auth.getSession(); if(!session)return login();
   const {data}=await sb.from('profiles').select('*').single(); S.me=data;
-  S.tab=data.role==='learner'?'tracker':'analytics'; await load();
+  const {data:{user}}=await sb.auth.getUser();const md=(user&&user.user_metadata)||{};
+  const g=(md.full_name||md.name||'').split(' ')[0]||(data.email||'').split('@')[0];S.gname=g.charAt(0).toUpperCase()+g.slice(1);
+  try{if(!localStorage.getItem('bw_tour'))S.tour=0}catch(e){S.tour=0}
+  await load();
 }
+if(sb)sb.auth.onAuthStateChange(e=>{if(e==='SIGNED_OUT')login()});
+
 async function load(){
   const r=S.me.role,rev=r==='ld'||r==='compliance',p={};
   if(r!=='learner')p.stats=sb.rpc('get_stats',{p_h:S.f.h||null,p_r:S.f.r||null,p_c:S.f.c||null});
@@ -79,101 +132,127 @@ async function load(){
   const k=Object.keys(p),res=await Promise.all(Object.values(p));
   S.rows=[];S.issues=[];S.runs=[];S.acts=[];S.stats=null;
   k.forEach((key,i)=>{res[i].error?toast(res[i].error.message,1):S[key]=res[i].data});
-  render();
+  S.loading=false;render();
 }
 async function act(fn,args,ok){const {error}=await sb.rpc(fn,args);await load();toast(error?error.message:ok,!!error)}
 async function switchRole(r){
   let st=S.me.staff_id; if(r==='learner'){st=prompt('Sign in as which staff ID?',st||'CV-001'); if(!st)return render()}
   const {error}=await sb.rpc('demo_set_role',{p_role:r,p_staff:st}); if(error)return toast(error.message,1);
-  const {data}=await sb.from('profiles').select('*').single(); S.me=data;
-  S.tab=r==='learner'?'tracker':'analytics'; await load(); toast('Signed in as '+RN[r]);
+  const {data}=await sb.from('profiles').select('*').single(); S.me=data;S.tab='home';S.chip='all';await load();toast('Now viewing as '+RN[r]);
 }
-const upload=(id,sid,cid)=>{const ref=prompt('Sample certificate file (simulated upload). Edit the name to test a mismatch:',`${sid}_C${cid}.pdf`);
-  if(ref)act('upload_certificate',{p_id:id,p_ref:ref},'Certificate uploaded: awaiting verification')};
+const upload=(id,sid,cid)=>{const ref=prompt('Certificate file name (simulated upload). Change the name to test a mismatch:',`${sid}_C${cid}.pdf`);
+  if(ref)act('upload_certificate',{p_id:id,p_ref:ref},'Certificate uploaded. It now waits for Lisa to verify.')};
 function download(id){const r=S.runs.find(x=>x.id===id),a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([r.csv],{type:'text/csv'}));a.download=`compliance-report-${id}-${r.run_at.slice(0,10)}.csv`;a.click()}
+function closeTour(){S.tour=null;try{localStorage.setItem('bw_tour','1')}catch(e){}render()}
 
-const ST={not_started:'Not started',in_progress:'In progress',completed:'Completed'};
-const CS={'n/a':'—',missing:'Missing',awaiting:'Awaiting verification',verified:'Verified',rejected:'Rejected'};
-const CC={missing:'bad',awaiting:'warn',verified:'ok',rejected:'bad'};
-const tag=(t,c)=>`<span class="t ${c||'mut'}">${esc(t)}</span>`;
-const IL=(i,a)=>i.type==='cert'?{missing:'Missing certificate',awaiting:'Awaiting verification',rejected:'Rejected certificate',verified:'Certificate'}[a.cert_status]:i.type==='overdue'?'Overdue':'Incomplete training';
-const filt=()=>S.rows.filter(a=>(!S.f.h||a.staff.hospital===S.f.h)&&(!S.f.r||a.staff.role===S.f.r)&&(!S.f.c||a.staff.cohort===S.f.c));
+const today=()=>new Date(new Date().toDateString());
+const isOver=a=>a.status!=='completed'&&new Date(a.due_date)<today();
+const open=a=>S.issues.filter(i=>i.assignment_id===a.id&&i.status!=='resolved');
+const needs=a=>S.me.role==='learner'?(a.status!=='completed'||['missing','awaiting','rejected'].includes(a.cert_status)):open(a).length>0;
+const IL=(i,a)=>i.type==='cert'?({missing:'Missing certificate',awaiting:'Awaiting verification',rejected:'Certificate rejected'}[a.cert_status]||'Certificate'):i.type==='overdue'?'Overdue course':'Course not finished';
+function filt(){return S.rows.filter(a=>(!S.f.h||a.staff.hospital===S.f.h)&&(!S.f.r||a.staff.role===S.f.r)&&(!S.f.c||a.staff.cohort===S.f.c)&&
+  (S.chip==='all'||(S.chip==='attention'&&needs(a))||(S.chip==='awaiting'&&a.cert_status==='awaiting')||(S.chip==='missing'&&a.cert_status==='missing')||(S.chip==='overdue'&&isOver(a))))}
+const head=(t,d)=>`<div class="ph"><h2>${t}</h2><p>${d}</p></div>`;
+const filters=()=>{const s=(k,l,o)=>`<label>${l}<select onchange="S.f.${k}=this.value;load()"><option value="">All</option>${o.map(x=>`<option ${S.f[k]===x?'selected':''}>${esc(x)}</option>`).join('')}</select></label>`;
+  return `<div class="bar">${s('h','Hospital',HOSP)}${s('r','Job role',ROLES)}${s('c','Staff group',['Existing','Incoming'])}</div>`};
 
-const feat=(f,pos,t,d)=>`<div class="feat"><div class="im" role="img" aria-label="${t}" style="background-image:url(assets/${f});background-position:${pos}"></div><div class="tx"><b>${t}</b><p class="l">${d}</p></div></div>`;
-function certView(){const a=S.rows.find(x=>x.id===S.cert);if(!a)return '';
-  const mism=a.cert_ref&&!a.cert_ref.includes(a.staff_id),code=((a.id*7919+a.course_id*104729)%1679616).toString(36).toUpperCase().padStart(4,'0');
-  const st={missing:['Not on file','bad'],awaiting:['Awaiting verification','warn'],verified:['Verified','ok'],rejected:['Rejected','bad'],'n/a':['Course not completed','mut']}[a.cert_status];
-  const lisa=S.me.role==='compliance'&&a.cert_status==='awaiting';
-  return `<div class="scrim" onclick="if(event.target===this){S.cert=null;render()}"><div style="max-width:620px;width:100%"><div class="cert" role="dialog" aria-label="Certificate"><div class="cin">
-  <div class="mark"><svg viewBox="0 0 40 40" width="44" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#fde4ee" stroke="#1a7db3" stroke-width="2"/><path d="M17 9h6v8h8v6h-8v8h-6v-8H9v-6h8z" fill="#1a7db3"/></svg><div><b>Cedar Valley Health</b><br><span class="l">Learning &amp; Compliance</span></div></div>
-  <h2>Certificate of training completion</h2><p class="l">On file for staff member</p><div class="big">${a.staff_id}</div>
-  <p>${a.staff.role} · ${esc(a.staff.hospital)} · ${a.staff.cohort} staff</p><p class="l">Required course</p><div class="course">${esc(a.courses.title)}</div>
-  <p>Due ${a.due_date} · Completed ${a.completed_on||'not yet'}</p>
-  <div class="meta"><div>Certificate file<br><b>${esc(a.cert_ref||'None uploaded')}</b><br><br>Verification code<br><b>CV-${code}</b><br><br>Uploaded by<br><b>${esc(a.submitted_by||'—')}</b></div><div class="stamp ${st[1]}">${st[0]}</div></div>
-  ${mism?'<p class="bad"><b>This file name does not match the employee. Do not verify.</b></p>':''}
-  <p class="l">Sample certificate for demonstration only. Fictional issuer. Not regulator approved.</p></div></div>
-  <div class="row" style="margin-top:8px;justify-content:center">${lisa?`<button class="p" onclick="S.cert=null;act('verify_certificate',{p_id:${a.id},p_approve:true},'Certificate verified; issue resolved')">Verify</button><button onclick="S.cert=null;act('verify_certificate',{p_id:${a.id},p_approve:false},'Certificate rejected; issue reopened')">Reject</button>`:''}
-  <button onclick="window.print()">Print</button><button onclick="S.cert=null;render()">Close</button></div></div></div>`}
-function render(){
-  if(!S.me)return; const r=S.me.role,rev=r==='ld'||r==='compliance';
-  const tabs=[['analytics','Analytics',r!=='learner'],['tracker',r==='learner'?'My training':'Certificate tracker',r!=='executive'],
-    ['issues','Issue queue',rev],['reports','Reports',r!=='learner'],['log','Activity',rev]].filter(t=>t[2]);
-  const sel=(k,l,o)=>`<select aria-label="${l}" onchange="S.f.${k}=this.value;load()"><option value="">${l}: all</option>${o.map(x=>`<option ${S.f[k]===x?'selected':''}>${esc(x)}</option>`).join('')}</select>`;
-  let v='';
-  if(S.tab==='analytics'&&S.stats)v=feat('team.jpg','center 30%','Training oversight at Cedar Valley Health','Counts and charts read from the same records as the tracker and Friday report.')+analytics();
-  if(S.tab==='tracker')v=(r==='learner'?feat('nurse.jpg','center 25%','Your required training','Mark a course complete here. Compliance checks your certificate before it counts as verified.'):'')+tracker(rev);
-  if(S.tab==='issues')v=feat('colleagues.jpg','top','Coordinate corrections','Start a review, follow up with staff, upload missing certificates. Lisa verifies them.')+issuesView();
-  if(S.tab==='reports')v=feat('meeting.jpg','center 35%','Weekly compliance review','Friday reports use the latest records and keep unresolved exceptions in view.')+reports(rev);
-  if(S.tab==='log')v=`<div class="wrap"><table><tr><th>When</th><th>Who</th><th>Role</th><th>Action</th><th>Record</th><th>Detail</th></tr>${S.acts.map(a=>`<tr><td>${fmt(a.at)}</td><td>${esc(a.actor)}</td><td>${esc(a.role)}</td><td>${esc(a.action)}</td><td>${a.assignment_id??''}</td><td>${esc(a.detail)}</td></tr>`).join('')}</table></div>`;
-  document.getElementById('app').innerHTML=`${S.msg?`<div class="toast ${S.msg.err?'err':''}" role="alert">${esc(S.msg.t)}</div>`:''}
-  <header><h1>Brightwell Premium Plan Simulation</h1><div class="row"><span class="mut">${esc(S.me.email)}</span>${tag(RN[r],'ok')}
-  <select aria-label="Demo role" onchange="switchRole(this.value)"><option>Switch demo role…</option>${Object.entries(RN).map(([k,n])=>`<option value="${k}">${n}</option>`).join('')}</select>
-  <button onclick="sb.auth.signOut()">Sign out</button></div></header>
-  <div class="banner">Simulation with invented data. Mock sign-in. Reports are marked DEMONSTRATION REPORT — NOT REGULATOR APPROVED.</div>
-  <nav>${tabs.map(t=>`<button class="${S.tab===t[0]?'on':''}" onclick="S.tab='${t[0]}';render()">${t[1]}</button>`).join('')}</nav>
-  ${['analytics','tracker','issues'].includes(S.tab)&&r!=='learner'?`<div class="row" style="margin:8px 0">${sel('h','Facility',HOSP)}${sel('r','Role',ROLES)}${sel('c','Group',['Existing','Incoming'])}</div>`:''}
-  ${v}
-  <p class="row" style="margin-top:16px"><button class="s" onclick="act('verify_certificate',{p_id:-1,p_approve:true},'')">Try restricted action: verify a certificate</button><span class="l">Database rejects it unless you are Lisa.</span></p>${S.cert?certView():''}`;
-}
+function nextStep(){const r=S.me.role,st=S.stats||{},pl=n=>n>1?'s':'';
+  if(r==='ld')return st.open?[`Review ${st.open} problem${pl(st.open)} that need attention`,'issues']:['All clear: open the Friday reports','reports'];
+  if(r==='compliance')return st.awaiting?[`Verify ${st.awaiting} certificate${pl(st.awaiting)} waiting for you`,'tracker','awaiting']:['Nothing waiting: view the Friday reports','reports'];
+  if(r==='executive')return ['Open the live dashboard','analytics'];
+  const n=S.rows.filter(a=>a.status!=='completed').length;return [n?`Finish your ${n} course${pl(n)}`:'All done: see your certificates','tracker']}
 
-function analytics(){const s=S.stats,rate=s.total?Math.round(100*s.completed/s.total):0;
-  const c=[['Required course assignments',s.total],['Completed',s.completed],['Overdue',s.overdue],['Completed, certificate missing',s.missing],
-    ['Awaiting verification',s.awaiting],['Verified certificates',s.verified],['Rejected certificates',s.rejected],['Open issues',s.open],['Resolved issues',s.resolved]];
-  return `<div class="grid">${c.map(x=>`<div class="box"><div class="n">${x[1]}</div><div class="l">${x[0]}</div></div>`).join('')}</div>
-  <h2>Completion by facility</h2><div class="box">
-  <p class="l">Completion rate: ${rate}% (${s.completed} of ${s.total} required course assignments, not number of people). Not the product activity figure.</p>
-  ${s.by_hospital.map(h=>`<p><b>${esc(h.hospital)}</b> <span class="l">${h.completed}/${h.total} completed · ${h.verified} verified · ${h.missing} missing</span></p>
-  <div class="bar" aria-hidden="true"><i style="width:${h.total?100*h.completed/h.total:0}%"></i></div>`).join('')||'<p class="l">No records match.</p>'}</div>`}
+function home(){const [txt,tab,chip]=nextStep(),info=INFO[S.me.role],st=S.stats,ok=tabsFor(S.me.role).map(t=>t[0]);
+  const k=S.me.role==='learner'?(()=>{const m=S.rows;return [['To finish',m.filter(a=>a.status!=='completed').length,'Courses you still need to complete'],['Completed',m.filter(a=>a.status==='completed').length,'Courses you have finished'],
+    ['Awaiting check',m.filter(a=>a.cert_status==='awaiting').length,'Certificates waiting for Compliance'],['Verified',m.filter(a=>a.cert_status==='verified').length,'Certificates approved']]})()
+   :st?[['Need attention',st.open,'Problems found automatically and not fixed yet'],['Awaiting verification',st.awaiting,'Certificates uploaded and waiting for Lisa'],['Overdue courses',st.overdue,'Required courses past their due date'],['Verified certificates',st.verified,'Evidence checked and approved']]:[];
+  return `<section class="hero"><span class="eyebrow">Viewing as ${RN[S.me.role]}${S.me.role==='learner'?' · '+S.me.staff_id:''}</span><h1>Welcome, ${esc(nameOf())}</h1><p class="lead">${info.d}</p>
+  <div class="row" style="margin-top:14px"><button class="p big" onclick="go('${tab}','${chip||'all'}')">${txt} →</button><button class="big" onclick="S.tour=0;render()">Take a 1-minute tour</button></div></section>
+  <div class="kpis">${k.map(x=>`<div class="card kpi"><b>${x[1]}</b><span>${x[0]}</span><p>${x[2]}</p></div>`).join('')}</div>
+  <div class="sec"><h2>How this works</h2><p class="mutc">Five steps from a hidden problem to a verified Friday report. The highlighted steps are yours.</p></div>
+  <div class="steps">${JOUR.map((j,i)=>{const me=j[3].includes(S.me.role),can=ok.includes(j[2]);return `<div class="step ${me?'me':''}"><i>${i+1}</i>${me?'<span class="here">Your part</span>':''}<h3>${j[0]}</h3><p>${j[1]}</p>${can?`<button class="s" onclick="go('${j[2]}')">Open →</button>`:''}</div>`}).join('')}</div>
+  <div class="sec"><h2>What you can do here</h2></div><div class="card"><ul class="ticks" style="margin:0">${info.todo.map(x=>`<li>${x}</li>`).join('')}</ul></div>`}
 
-function tracker(rev){return `<div class="wrap"><table><tr><th>Staff ID</th><th>Facility</th><th>Role</th><th>Group</th><th>Course</th><th>Due</th><th>Status</th><th>Completed</th><th>Certificate</th><th>Evidence</th><th>Flags</th><th>Updated</th><th></th></tr>
-  ${filt().map(a=>{const od=a.status!=='completed'&&new Date(a.due_date)<new Date(new Date().toDateString());
-  const fl=S.issues.filter(i=>i.assignment_id===a.id&&i.status!=='resolved').map(i=>tag(IL(i,a),i.type==='cert'&&a.cert_status==='awaiting'?'warn':'bad')).join(' ');
-  let b='';
-  if(a.status==='completed')b+=`<button class="s" onclick="S.cert=${a.id};render()">View certificate</button> `;
-  if(a.status!=='completed'&&(rev||S.me.role==='learner'))b+=`<button class="s" onclick="act('complete_training',{p_id:${a.id}},'Training marked completed')">Mark complete</button> `;
-  if(rev&&a.status==='completed'&&['missing','rejected'].includes(a.cert_status))b+=`<button class="s" onclick="upload(${a.id},'${a.staff_id}',${a.course_id})">Upload certificate</button> `;
-  if(rev&&a.cert_status==='awaiting')b+=`<button class="s" onclick="act('verify_certificate',{p_id:${a.id},p_approve:true},'Certificate verified; issue resolved')">Verify</button> <button class="s" onclick="act('verify_certificate',{p_id:${a.id},p_approve:false},'Certificate rejected; issue reopened')">Reject</button>`;
-  return `<tr><td>${a.staff_id}</td><td>${esc(a.staff.hospital)}</td><td>${a.staff.role}</td><td>${a.staff.cohort}</td><td>${esc(a.courses.title)}</td><td>${a.due_date}</td>
-  <td>${ST[a.status]} ${od?tag('Overdue','bad'):''}</td><td>${a.completed_on||''}</td><td>${esc(a.cert_ref||'')}</td><td>${tag(CS[a.cert_status],CC[a.cert_status])}</td><td>${fl}</td><td>${fmt(a.updated_at)}</td><td>${b}</td></tr>`}).join('')}</table></div>`}
+function analytics(){const s=S.stats;if(!s)return '';const rate=s.total?Math.round(100*s.completed/s.total):0;
+  const c=[['Required courses',s.total,'Every course assigned to staff in this view'],['Completed',s.completed,'Courses marked complete'],['Overdue',s.overdue,'Past due and not complete'],['Done, no certificate',s.missing,'Completed but proof is missing'],
+   ['Awaiting verification',s.awaiting,'Certificate uploaded, not yet checked'],['Verified',s.verified,'Certificate checked and approved'],['Rejected',s.rejected,'Certificate did not match'],['Open issues',s.open,'Problems not yet fixed'],['Resolved issues',s.resolved,'Problems fixed and checked']];
+  return head('Dashboard','Live counts from the same records as the tracker and the Friday report.')+filters()+
+  `<div class="kpis">${c.map(x=>`<div class="card kpi"><b>${x[1]}</b><span>${x[0]}</span><p>${x[2]}</p></div>`).join('')}</div>
+  <div class="card"><h3>Completion by hospital</h3><p class="mutc" style="font-size:14px">${rate}% complete overall: ${s.completed} of ${s.total} required course assignments (counts courses, not people).</p>
+  ${s.by_hospital.map(h=>`<p style="margin-top:12px"><b>${esc(h.hospital)}</b> <span class="mutc">${h.completed} of ${h.total} complete · ${h.verified} verified · ${h.missing} missing certificate</span></p><div class="bar2" aria-hidden="true"><i style="width:${h.total?100*h.completed/h.total:0}%"></i></div>`).join('')||'<p class="empty">No records match these filters.</p>'}</div>`}
+
+function tracker(rev){const rows=filt(),L=S.me.role==='learner';
+  const chips=`<div class="chips">${CHIPS.map(c=>`<button class="${S.chip===c[0]?'on':''}" onclick="S.chip='${c[0]}';render()">${c[1]}</button>`).join('')}</div>`;
+  const body=rows.length?`<div class="wrap"><table><tr><th>Staff</th><th>Hospital</th><th>Course</th><th>Course status</th><th>Certificate</th><th>Needs attention</th><th>Last update</th><th>What you can do</th></tr>
+  ${rows.map(a=>{const fl=open(a).map(i=>tag(IL(i,a),i.type==='cert'&&a.cert_status==='awaiting'?'warn':'bad')).join('')||(L&&needs(a)?tag(a.status!=='completed'?'Course to finish':'Certificate pending','warn'):tag('All good','ok'));
+   let b='';
+   if(a.status!=='completed'&&(rev||L))b+=`<button class="s" onclick="act('complete_training',{p_id:${a.id}},'Course marked complete')">Mark complete</button> `;
+   if(a.status==='completed')b+=`<button class="s" onclick="S.cert=${a.id};render()">View certificate</button> `;
+   if(rev&&a.status==='completed'&&['missing','rejected'].includes(a.cert_status))b+=`<button class="s p" onclick="upload(${a.id},'${a.staff_id}',${a.course_id})">Upload certificate</button> `;
+   if(rev&&a.cert_status==='awaiting')b+=`<button class="s p" onclick="act('verify_certificate',{p_id:${a.id},p_approve:true},'Certificate verified. The issue is resolved.')">Verify</button> <button class="s" onclick="act('verify_certificate',{p_id:${a.id},p_approve:false},'Certificate rejected. The issue is reopened.')">Reject</button>`;
+   return `<tr><td><b>${a.staff_id}</b><small>${a.staff.role} · ${a.staff.cohort}</small></td><td>${esc(a.staff.hospital)}</td><td>${esc(a.courses.title)}<small>Due ${a.due_date}</small></td>
+   <td>${tag(ST[a.status],a.status==='completed'?'ok':'')} ${isOver(a)?tag('Overdue','bad'):''}<small>${a.completed_on?'Completed '+a.completed_on:''}</small></td>
+   <td>${tag(CS[a.cert_status],CC[a.cert_status])}<small>${esc(a.cert_ref||'')}</small></td><td>${fl}</td><td><small>${fmt(a.updated_at)}</small></td><td>${b}</td></tr>`}).join('')}</table></div>`
+   :'<div class="card empty">Nothing matches this view. Try “All” above.</div>';
+  return head(L?'My training':'Training & certificates',L?'Your required courses and the status of each certificate.':'Every required course, with its certificate status. Use the buttons on the right to act.')+(L?'':filters())+chips+body}
 
 function issuesView(){const m=Object.fromEntries(S.rows.map(a=>[a.id,a]));
   const list=S.issues.filter(i=>m[i.assignment_id]&&filt().includes(m[i.assignment_id])).sort((a,b)=>(a.status==='resolved')-(b.status==='resolved'));
-  return `<div class="wrap"><table><tr><th>Staff ID</th><th>Facility</th><th>Course</th><th>Issue</th><th>Status</th><th>Reviewer</th><th>Updated</th><th></th></tr>
-  ${list.map(i=>{const a=m[i.assignment_id];return `<tr><td>${a.staff_id}</td><td>${esc(a.staff.hospital)}</td><td>${esc(a.courses.title)}</td><td>${IL(i,a)}</td>
-  <td>${tag(i.status.replace('_',' '),i.status==='resolved'?'ok':i.status==='under_review'?'warn':'bad')}</td><td>${esc(i.reviewer||'')}</td><td>${fmt(i.updated_at)}</td>
-  <td>${['flagged','reopened'].includes(i.status)?`<button class="s" onclick="act('start_review',{p_issue:${i.id}},'Issue under review')">Start review</button>`:''}</td></tr>`}).join('')}</table></div>`}
+  return head('Issues to fix','Problems found automatically. Start a review, fix it in Training & certificates, and Lisa verifies certificates.')+filters()+
+  (list.length?`<div class="wrap"><table><tr><th>Staff</th><th>Course</th><th>Problem</th><th>Status</th><th>Handled by</th><th>Updated</th><th></th></tr>
+  ${list.map(i=>{const a=m[i.assignment_id];return `<tr><td><b>${a.staff_id}</b><small>${esc(a.staff.hospital)}</small></td><td>${esc(a.courses.title)}</td><td>${IL(i,a)}</td>
+  <td>${tag(i.status.replace('_',' '),i.status==='resolved'?'ok':i.status==='under_review'?'warn':'bad')}</td><td>${esc(i.reviewer||'')}</td><td><small>${fmt(i.updated_at)}</small></td>
+  <td>${['flagged','reopened'].includes(i.status)?`<button class="s p" onclick="act('start_review',{p_issue:${i.id}},'Review started')">Start review</button> `:''}${i.status!=='resolved'?`<button class="s" onclick="go('tracker')">Fix it →</button>`:''}</td></tr>`}).join('')}</table></div>`:'<div class="card empty">No issues in this view.</div>')}
 
 function reports(rev){const h=(S.settings.find(x=>x.key==='report_hour')||{}).value;
-  return `<div class="box"><p>Scheduled: every Friday at ${h}:00 Ohio time (America/New_York, daylight-saving aware). A database job checks hourly and runs without anyone pressing a button.</p>
-  ${rev?`<div class="row"><button class="p" onclick="act('run_report_now',{},'Report created')">Run report now</button>
-  <button onclick="act('simulate_friday',{p_fail:false},'Scheduled-Friday test run saved')">Test scheduled Friday run</button>
-  <button onclick="act('simulate_friday',{p_fail:true},'Test run recorded as failed')">Test failed run</button>
-  <button onclick="act('run_scan',{},'Scan complete')">Run weekday scan</button></div>`:'<p class="l">Executives can view and download reports but cannot run or edit them.</p>'}</div>
-  <h2>Report history (saved snapshots never change)</h2><div class="wrap"><table><tr><th>Run</th><th>When</th><th>Type</th><th>Period</th><th>Outcome</th><th>Exceptions</th><th></th></tr>
-  ${S.runs.map(r=>`<tr><td>${r.id}</td><td>${fmt(r.run_at)}</td><td>${esc(r.kind)}</td><td>${esc(r.period)}</td>
-  <td>${r.outcome==='success'?tag('Succeeded','ok'):tag('FAILED: '+r.error,'bad')}</td><td>${r.exception_count??''}</td>
-  <td>${r.csv?`<button class="s" onclick="download(${r.id})">Download CSV</button>`:''}</td></tr>`).join('')}</table></div>`}
+  return head('Friday reports','A report is saved automatically every Friday. Older reports never change.')+
+  `<div class="card"><p><b>Automatic schedule:</b> every Friday at ${h}:00 Ohio time. No one needs to press a button.</p>
+  ${rev?`<div class="row"><button class="p" onclick="act('run_report_now',{},'New report created. Download it below.')">Run report now</button></div>
+  <p class="mutc" style="font-size:13px;margin-top:10px">For the demo: these simulate the automatic Friday run so you do not have to wait.</p>
+  <div class="row"><button class="s" onclick="act('simulate_friday',{p_fail:false},'Test Friday run saved')">Test Friday run</button><button class="s" onclick="act('simulate_friday',{p_fail:true},'Test run recorded as failed')">Test a failed run</button><button class="s" onclick="act('run_scan',{},'Weekday check complete')">Run weekday check</button></div>`
+  :'<p class="mutc">You can view and download reports. Only Kevin and Lisa can create them.</p>'}</div>
+  <div class="sec"><h3>Saved reports</h3></div>
+  ${S.runs.length?`<div class="wrap"><table><tr><th>Run</th><th>When</th><th>Type</th><th>Period</th><th>Result</th><th>Problems listed</th><th></th></tr>
+  ${S.runs.map(r=>`<tr><td>${r.id}</td><td>${fmt(r.run_at)}</td><td>${esc(r.kind)}</td><td>${esc(r.period||'')}</td><td>${r.outcome==='success'?tag('Succeeded','ok'):tag('FAILED: '+r.error,'bad')}</td><td>${r.exception_count??''}</td>
+  <td>${r.csv?`<button class="s p" onclick="download(${r.id})">Download CSV</button>`:''}</td></tr>`).join('')}</table></div>`:'<div class="card empty">No reports yet. Press “Run report now”.</div>'}`}
 
+function certView(){const a=S.rows.find(x=>x.id===S.cert);if(!a)return '';
+  const mism=a.cert_ref&&!a.cert_ref.includes(a.staff_id),code=((a.id*7919+a.course_id*104729)%1679616).toString(36).toUpperCase().padStart(4,'0');
+  const st={missing:['Not on file','bad'],awaiting:['Awaiting verification','warn'],verified:['Verified','ok'],rejected:['Rejected','bad'],'n/a':['Course not completed','mutc']}[a.cert_status];
+  const lisa=S.me.role==='compliance'&&a.cert_status==='awaiting';
+  return `<div class="scrim" onclick="if(event.target===this){S.cert=null;render()}"><div style="max-width:620px;width:100%"><div class="cert" role="dialog" aria-label="Certificate"><div class="cin">
+  <div class="mark"><svg viewBox="0 0 40 40" width="44" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#fde7f0" stroke="#1a7db3" stroke-width="2"/><path d="M17 9h6v8h8v6h-8v8h-6v-8H9v-6h8z" fill="#1a7db3"/></svg><div><b>Cedar Valley Health</b><br><span class="mutc">Learning &amp; Compliance</span></div></div>
+  <h2>Certificate of training completion</h2><p class="mutc">On file for staff member</p><div class="big2">${a.staff_id}</div>
+  <p>${a.staff.role} · ${esc(a.staff.hospital)} · ${a.staff.cohort} staff</p><p class="mutc">Required course</p><div class="course">${esc(a.courses.title)}</div>
+  <p>Due ${a.due_date} · Completed ${a.completed_on||'not yet'}</p>
+  <div class="meta"><div>Certificate file<br><b>${esc(a.cert_ref||'None uploaded')}</b><br><br>Verification code<br><b>CV-${code}</b><br><br>Uploaded by<br><b>${esc(a.submitted_by||'—')}</b></div><div class="stamp ${st[1]}">${st[0]}</div></div>
+  ${mism?'<p class="bad"><b>This file name does not match the employee. Do not verify.</b></p>':''}
+  <p class="mutc" style="font-size:13px">Sample certificate for demonstration only. Fictional issuer. Not regulator approved.</p></div></div>
+  <div class="row" style="margin-top:8px;justify-content:center">${lisa?`<button class="p" onclick="S.cert=null;act('verify_certificate',{p_id:${a.id},p_approve:true},'Certificate verified. The issue is resolved.')">Verify</button><button onclick="S.cert=null;act('verify_certificate',{p_id:${a.id},p_approve:false},'Certificate rejected. The issue is reopened.')">Reject</button>`:''}
+  <button onclick="window.print()">Print</button><button onclick="S.cert=null;render()">Close</button></div></div></div>`}
+
+function tourView(){const i=S.tour,t=TOUR[i],last=i===TOUR.length-1;
+  return `<div class="scrim"><div class="tour" role="dialog" aria-label="Quick tour"><span class="eyebrow" style="background:var(--sky)">Step ${i+1} of ${TOUR.length}</span><h2 style="margin-top:8px">${t[0]}</h2><p>${t[1]}</p>
+  <div class="dots">${TOUR.map((_,n)=>`<i class="${n===i?'on':''}"></i>`).join('')}</div>
+  <div class="row" style="justify-content:space-between"><button class="s" onclick="closeTour()">Skip</button><div class="row">${i?'<button onclick="S.tour--;render()">Back</button>':''}<button class="p" onclick="${last?'closeTour()':'S.tour++;render()'}">${last?'Start exploring':'Next'}</button></div></div></div></div>`}
+
+function render(){
+  if(!S.me)return; const r=S.me.role,rev=r==='ld'||r==='compliance',tabs=tabsFor(r);
+  if(!tabs.some(t=>t[0]===S.tab))S.tab='home';
+  $('bg').className=BG[S.tab]||'b-hall';
+  $('top').innerHTML=`<div class="top"><div class="in"><div class="brand"><svg viewBox="0 0 40 40" width="34" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#fde7f0" stroke="#1a7db3" stroke-width="2"/><path d="M17 9h6v8h8v6h-8v8h-6v-8H9v-6h8z" fill="#1a7db3"/></svg><span>Brightwell<small>Cedar Valley Health</small></span></div>
+  <nav class="tabs" aria-label="Main">${tabs.map(t=>`<button class="${S.tab===t[0]?'on':''}" onclick="go('${t[0]}')">${t[1]}</button>`).join('')}</nav>
+  <div class="who"><button class="s" onclick="S.tour=0;render()" aria-label="Help and tour">? Help</button><label class="mutc">Demo role <select onchange="switchRole(this.value)">${Object.entries(RN).map(([k,n])=>`<option value="${k}" ${k===r?'selected':''}>${n}</option>`).join('')}</select></label>
+  <span class="av" title="${esc(S.me.email)}">${esc(nameOf()[0])}</span><button class="s" onclick="sb.auth.signOut()">Sign out</button></div></div></div>`;
+  let v='';
+  if(S.loading)v='<div class="card empty">Loading your workspace…</div>';
+  else if(S.tab==='home')v=home();else if(S.tab==='analytics')v=analytics();else if(S.tab==='tracker')v=tracker(rev);
+  else if(S.tab==='issues')v=issuesView();else if(S.tab==='reports')v=reports(rev);
+  else v=head('Activity history','Who did what, and when. Automatic checks appear as “system”.')+`<div class="wrap"><table><tr><th>When</th><th>Who</th><th>Role</th><th>Action</th><th>Record</th><th>Detail</th></tr>${S.acts.map(a=>`<tr><td>${fmt(a.at)}</td><td>${esc(a.actor)}</td><td>${esc(a.role)}</td><td>${esc(a.action)}</td><td>${a.assignment_id??''}</td><td>${esc(a.detail)}</td></tr>`).join('')}</table></div>`;
+  $('app').innerHTML=`${v}<p class="foot">Simulation with invented data. Mock sign-in. Reports are marked DEMONSTRATION REPORT — NOT REGULATOR APPROVED.<br>Security check: <button onclick="act('verify_certificate',{p_id:-1,p_approve:true},'')">Try verifying a certificate</button> The database refuses unless you are Lisa.</p>
+  ${S.msg?`<div class="toast ${S.msg.err?'err':''}" role="alert">${esc(S.msg.t)}</div>`:''}`;
+  $('modal').innerHTML=S.cert?certView():S.tour!==null?tourView():'';
+}
 init();
 </script></body></html>
