@@ -6,9 +6,9 @@
 <style>
 :root{--ink:#1f2d3d;--mut:#5f7387;--line:#dbe8f2;--acc:#1a7db3;--accd:#12608a;--sky:#e8f5fd;--sky2:#cfe9f8;--pink:#fde7f0;--pinkd:#e58fb0;--ok:#1b7a4f;--warn:#a86a00;--bad:#c0264b}
 *{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.55 "Source Sans 3",system-ui,sans-serif;background:#fff}
-#bg{position:fixed;inset:0;z-index:-1;background:center/cover}
-#bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.87),rgba(238,247,253,.92))}
-.b-hall{background-image:url(assets/bg-hall.jpg),url(bg-hall.jpg)}.b-ward{background-image:url(assets/bg-ward.jpg),url(bg-ward.jpg)}.b-team{background-image:url(assets/bg-team.jpg),url(bg-team.jpg)}.b-class{background-image:url(assets/bg-class.jpg),url(bg-class.jpg)}
+#bg{position:fixed;inset:0;z-index:-1;background-position:center;background-size:cover;background-repeat:no-repeat}
+#bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(238,247,253,.86))}
+.b-hall{background-image:url(assets/bg-hall.jpg),url(bg-hall.jpg)}.b-ward{background-image:url(assets/bg-ward.jpg),url(bg-ward.jpg)}.b-team{background-image:url(assets/bg-team.jpg),url(bg-team.jpg)}.b-class{background-image:url(assets/bg-class.jpg),url(bg-class.jpg)}.b-meet{background-image:url(assets/meeting.jpg),url(meeting.jpg)}.b-station{background-image:url(assets/team.jpg),url(team.jpg)}
 main{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
 h1{font-size:34px;line-height:1.15;margin:6px 0 10px}h2{font-size:22px;margin:0 0 4px}h3{font-size:17px;margin:0 0 4px}p{margin:0 0 8px}
 .mut{color:var(--mut)}.lead{font-size:18px;color:#34495e;max-width:560px}
@@ -99,7 +99,7 @@ const nameOf=()=>S.gname||'there';
 const tabsFor=r=>r==='learner'?[['home','Home'],['tracker','My training']]
  :r==='executive'?[['home','Home'],['analytics','Dashboard'],['reports','Friday reports']]
  :[['home','Home'],['analytics','Dashboard'],['tracker','Training & certificates'],['issues','Issues to fix'],['reports','Friday reports'],['log','Activity history']];
-const BG={home:'b-hall',analytics:'b-hall',tracker:'b-ward',issues:'b-team',reports:'b-class',log:'b-team'};
+const BG={home:'b-hall',analytics:'b-team',tracker:'b-ward',issues:'b-class',reports:'b-meet',log:'b-station'};
 
 function toast(t,err){S.msg={t,err};render();setTimeout(()=>{S.msg=null;render()},6000)}
 function go(t,c){S.tab=t;S.chip=c||'all';render();window.scrollTo(0,0)}
